@@ -18,4 +18,4 @@ make
 
 To kick things off.
 
-On each commit a new release is cut.
+On each push to main a new release is cut.
