@@ -1,6 +1,6 @@
 ARCHIVE=workshop-material.tar.gz
 MATERIAL_DIR=build
-WEBPAGE_DIR=public
+WEBPAGE_DIR=public-build
 SUB_DIRECTORIES=workshop resources
 CLEAN_TARGETS=$(addsuffix clean,$(SUB_DIRECTORIES))
 
@@ -12,11 +12,11 @@ ${ARCHIVE}: ${MATERIAL_DIR}
 
 ${MATERIAL_DIR}: ${SUB_DIRECTORIES} ${REFERENCE}
 	mkdir -p $@
-	cp -rf resources/material/* $@/
-	cp -rf workshop/guide/book $@/guide
+	cp -rfa resources/material/. $@/
+	cp -rfa workshop/guide/book $@/guide
 	mkdir -p $@/example
-	cp -rf workshop/example/* $@/example
-	cp -rf presentation $@/presentation
+	cp -rfa workshop/example/. $@/example
+	cp -rfa presentation $@/presentation
 
 ${SUB_DIRECTORIES}:
 	${MAKE} -C $@
@@ -24,13 +24,13 @@ ${SUB_DIRECTORIES}:
 ${WEBPAGE_DIR}: ${MATERIAL_DIR} ${ARCHIVE}
 	mkdir -p $@
 	echo "<meta http-equiv=refresh content=0;url=guide/index.html>" > $@/index.html
-	cp -rf $</guide $@/guide
-	cp -rf $</presentation $@/presentation
-	cp resources/public/* $@/
+	cp -rfa $</guide $@/guide
+	cp -rfa $</presentation $@/presentation
+	cp -rfa resources/public/. $@/
 
 docs/workshop: ${WEBPAGE_DIR}
 	mkdir -p $@
-	cp -rf $</* $@
+	cp -rfa $</* $@
 
 clean: ${CLEAN_TARGETS}
 	rm -rf ${ARCHIVE} ${MATERIAL_DIR} ${WEBPAGE_DIR} docs/workshop
