@@ -7,7 +7,7 @@ jobs:
   create-archive:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
       - name: Build artifact
